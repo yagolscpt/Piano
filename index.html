@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIANO</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.43/Tone.js"
+        integrity="sha512-n7wMz32h+9PqvKp0AJ++fkZxe9wP7XFiN2sCgM/Kp+8BgfNzMjSofcC6zSRAr4+WKPnqv1k8SjbgVW5E5K5n5w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<style>
+    .container {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .container button {
+        width: 50px;
+        height: 300px;
+        padding: 5PX;
+        margin: 5px;
+    }
+</style>
+
+<body id="body">
+    <h1>PIANO</h1>
+    <div class="container">
+        <button id="c4">DO</button>
+        <button id="d4">RE</button>
+        <button id="e4">MI</button>
+        <button id="f4">FA</button>
+        <button id="g4">SOL</button>
+        <button id="a4">LA</button>
+        <button id="b4">SI</button>
+        <button id="c5">DO</button>
+    </div>
+</body>
+<script>
+    const synth = new Tone.Synth().toDestination();
+
+
+    let notes = ['c4', 'd4', 'e4', 'f4', 'g4', 'a4', 'b4', 'c5']
+    let noteKeys = {'a':'c4','s':'d4','d':"e4","f":'f4','g':'g4','h':'a4','j':'b4','k':'c5'}
+
+    notes.forEach(note => document.getElementById(note)
+        .addEventListener('click', () => synth.triggerAttackRelease(note, "8n"))
+    )
+
+    function noteSound(event) {
+      /*  switch(event.key){
+            case 'q':synth.triggerAttackRelease('c4',"8n"); break;
+            case 'w':synth.triggerAttackRelease('d4',"8n"); break;
+            case 'e':synth.triggerAttackRelease('e4',"8n"); break;
+            case 'r':synth.triggerAttackRelease('f4',"8n"); break;
+            case 't':synth.triggerAttackRelease('a4',"8n"); break;
+            case 'y':synth.triggerAttackRelease('b4',"8n"); break;
+            case 'u':synth.triggerAttackRelease('c5',"8n"); break;
+        */  
+            
+        synth.triggerAttackRelease(noteKeys[event.key],'8n');
+
+    }
+        document.getElementById('body').addEventListener('keypress',noteSound)
+
+
+</script>
+
+</html>
